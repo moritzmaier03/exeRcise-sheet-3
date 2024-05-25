@@ -1,7 +1,7 @@
 ---
 title: "Exercise #3"
 subtitle: "Fortgeschrittene Statistische Software für NF"
-author: "Name (Martrikelnummer), Name (Martrikelnummer), ..."
+author: "Jonas Pörnbacher (12614356), Moritz Maier (12582634)"
 date: "`r Sys.Date()`"
 output: distill::distill_article
 ---
@@ -44,6 +44,16 @@ c)  For all of the following tasks in this exercise sheet we ask you to
 
 d)  Name 2 strengths and 2 weaknesses of git. (Don't forget to create a
     commit after this answer, see *1c*)
+    
+    strengths:
+    Very hard to lose files with git,
+    History allows you to go back and understand changes or revert when there are problems
+    
+    weaknesses:
+    History takes up file space,
+    Struggles with binary
+    
+    
 e)  Knit this exercise sheet. Some new files will automatically be
     generated when knitting the sheet e.g. the HTML page. Ignore these
     files, as we only want to track the source files themselves.
@@ -78,6 +88,17 @@ b)  Load the data for both years into R. Check the type of the count
     not numeric? Fix the problem in an appropriate manner, it is OK if
     some of the counts are inaccurate because of this. Explain your
     solution and the repercussions.
+    
+```{r}
+library(tidyverse)
+vornamen_2022 <- read_csv(file.path("data","open_data_portal_2022.csv"))
+vornamen_2023 <- read_csv(file.path("data", "vornamen-muenchen-2023.csv"))
+
+vornamen_2022 <- vornamen_2022 %>% mutate(Anzahl = parse_number(Anzahl))
+vornamen_2023 <- vornamen_2023 %>% mutate(Anzahl = parse_number(Anzahl))
+
+```
+"There is an entry '4 oder weniger' in both instances of the 'Anzahl' column. mutate(Count = parse_number(Anzahl)) converts the column to numeric and removes the 'oder weniger' part, so the entry is now simply '4'. This value is likely to be larger now, as all entries that were less than 4 now also have the value of 4."
 
 c)  Calculate the total number of babies born in Munich in 2022
     and 2023. Which year had the bigger baby-boom?

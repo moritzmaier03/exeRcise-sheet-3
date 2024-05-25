@@ -103,6 +103,13 @@ vornamen_2023 <- vornamen_2023 %>% mutate(Anzahl = parse_number(Anzahl))
 c)  Calculate the total number of babies born in Munich in 2022
     and 2023. Which year had the bigger baby-boom?
 
+```{r}
+sum(vornamen_2022$Anzahl) + sum(vornamen_2023$Anzahl)
+sum(vornamen_2022$Anzahl)
+sum(vornamen_2023$Anzahl)
+```
+"Overall, in 2022 and 2023, a total of 49,428 babies were born. In 2023, with 25,199 babies, there were 970 more babies than in 2022 with 24,229 babies."
+
 d)  Add a new column `year` to both datasets which holds the correct
     year for each.
 

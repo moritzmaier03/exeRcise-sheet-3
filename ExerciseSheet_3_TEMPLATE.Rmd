@@ -129,6 +129,14 @@ vornamen <- bind_rows(vornamen_2023,vornamen_2022)
 f)  Combine the counts for same names to determine the most popular
     names across both years. Print out the top 10 names in a nicely
     formatted table for both years. Include a table caption.
+```{r}
+combined <- vornamen %>%
+  group_by(Vorname) %>%
+  summarise(Total_Count = sum(Anzahl))
+
+combined %>% arrange(desc(Total_Count)) %>% head(10) %>% select(Vorname) %>% knitr::kable(caption = "Top 10 Vornamen")
+```
+
 
 ## Exercise 4: Open Analysis (4 points)
 

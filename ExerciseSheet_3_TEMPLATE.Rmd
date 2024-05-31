@@ -150,13 +150,19 @@ a)  Go to <https://github.com/owid/owid-datasets/tree/master/datasets>
 b)  Download the dataset and track it in git.
 c)  Put the name / title of the dataset and a link to it below.
 
--   Dataset Name: COVID Government Response (OxBSG)
--   Link: <https://github.com/owid/owid-datasets/tree/master/datasets/COVID%20Government%20Response%20(OxBSG)>
+-   Dataset Name: Renewable Energy Capacity by Technology - IRENA (2017)
+-   Link: <https://github.com/owid/owid-datasets/tree/master/datasets/Renewable%20Energy%20Capacity%20by%20Technology%20-%20IRENA%20(2017)>
 
 d)  Come up with a (research) question you want to answer with the data
     and briefly explain why you believe this is an interesting question
     within one sentence. It should be a question that can be answered
     with the dataset and using R.
+    
+```{r}
+covidData <- read.csv(file.path("data", "Renewable Energy Capacity by Technology - IRENA (2017).csv"))
+```
+
+
 e)  Use R to answer your chosen question.
 f)  Create a meaningful plot / figure with the dataset. Make sure to
     provide a figure caption (via the chunk options / Rmarkdown) and

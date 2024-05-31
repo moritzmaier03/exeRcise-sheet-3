@@ -150,8 +150,8 @@ a)  Go to <https://github.com/owid/owid-datasets/tree/master/datasets>
 b)  Download the dataset and track it in git.
 c)  Put the name / title of the dataset and a link to it below.
 
--   Dataset Name: ...
--   Link: <https://github.com/owid/owid-datasets/>...
+-   Dataset Name: COVID Government Response (OxBSG)
+-   Link: <https://github.com/owid/owid-datasets/tree/master/datasets/COVID%20Government%20Response%20(OxBSG)>
 
 d)  Come up with a (research) question you want to answer with the data
     and briefly explain why you believe this is an interesting question
@@ -161,6 +161,7 @@ e)  Use R to answer your chosen question.
 f)  Create a meaningful plot / figure with the dataset. Make sure to
     provide a figure caption (via the chunk options / Rmarkdown) and
     correctly label the figure.
+    
 
 ## Final Note
 

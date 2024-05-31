@@ -157,17 +157,54 @@ d)  Come up with a (research) question you want to answer with the data
     and briefly explain why you believe this is an interesting question
     within one sentence. It should be a question that can be answered
     with the dataset and using R.
-    
-```{r}
-covidData <- read.csv(file.path("data", "Renewable Energy Capacity by Technology - IRENA (2017).csv"))
-```
 
+Which renewable energy source is the most promising?
 
 e)  Use R to answer your chosen question.
 f)  Create a meaningful plot / figure with the dataset. Make sure to
     provide a figure caption (via the chunk options / Rmarkdown) and
     correctly label the figure.
-    
+
+We will work on e) and f) simultaneously as the graphs go hand in hand with working out our question.
+First we will plot the energy capacity of each type of renewable energy.
+
+```{r}
+data <- read.csv(file.path("data","Renewable Energy Capacity by Technology - IRENA (2017).csv"))
+
+ggplot(
+  data = data,
+  mapping = aes(
+    x = Year,
+    y = Renewable.Energy.Capacity.by.Technology..IRENA..2017..,
+    color = Entity
+  )
+) + geom_point()+
+  geom_line()+
+  labs(title = "Energy-capacity of renewable energy source over time",
+       x = "Year",
+       y = "Energy capacity in kW",
+       color = "Name") +
+  theme_minimal()
+```
+With this plot we have a overview of the data and can see that Hydro-power outclasses the other sources by a lot.
+But we are not interested in the absolute value, but rather we want to look at the energy-source with the most potential.
+To answer this question we can look at the percentage increase of each energy-type and take the avg. of the last 5 years.
+```{r}
+data <- data %>% rename(value = Renewable.Energy.Capacity.by.Technology..IRENA..2017..)
+data <- data %>% arrange(data$Entity, data$Year) %>% group_by(data$Entity) %>%
+  mutate(relative_increase = (value - lag(value)) / lag(value) * 100) %>% ungroup()  %>% filter(Year > 2011) %>%
+  group_by(Entity) %>% summarize(average_relative_increase = mean(relative_increase, na.rm = TRUE)) %>%
+  arrange(desc(average_relative_increase))
+
+ggplot(data = data, mapping = aes(x = reorder(Entity, -average_relative_increase),  y = average_relative_increase)) +
+  geom_bar(stat = "identity", fill = "skyblue", color = "black") +
+  labs(title = "Average percentage increase of renewable energy sources over the last 5 years",
+       x = "avg. percentage increase",
+       y = "Energy-type") +
+  theme_minimal()
+
+```
+
 
 ## Final Note
 
